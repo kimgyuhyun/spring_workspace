@@ -64,7 +64,7 @@
     <span th:text="${list[2]}">방위</span>
     <span th:text="${list[3]}">방위</span><br/>
     <!-- 14: 참조(Map) -->
-    .으로 접근: <span th:text="${map.minsoo.name}">이름1</span>
+    <span th:text="${map.minsoo.name}">.으로 접근: 이름1</span>
     <span th:text="${map.jiyoung.name}">이름2</span><br/>
     []로 접근: <span th:text="${map['minsoo']['name']}">이름1: []로 접근</span>
     <span th:text="${map['jiyoung']['name']}">이름2: []로 접근</span>
@@ -80,7 +80,7 @@
         size-> [[${s.size}]], current-> [[${s.current}]].
         even-> [[${s.even}]], odd-> [[${s.odd}]],
         first-> [[${s.first}]]. last-> [[${s.last}]],
-        [[*{id}]]: [[*name}]]
+        [[*{id}]]: [[*{name}]]
     </p>
     </div>
     <!-- 17: 유틸리티 객체(숫자,. 날짜 및 시간, 문자열) -->
