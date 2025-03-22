@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    //@Before("execution(* com.example.demo.service.TargetService.*(..))") //시작되기전
+    @Before("execution(* com.example.demo.service.TargetService.*(..))") //시작되기전
     public void beforeAdvice(JoinPoint joinpoint) {
         LocalDateTime startTime =  LocalDateTime.now(); //현재 날짜 및 시간 가져오기
         String formattedTime = startTime.format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS:SSS"));
@@ -34,7 +34,7 @@ public class LoggingAspect {
         System.out.println("메서드 종료: " + formattedTime);
     }
 
-     @Around("execution(* com.example.demo.service.TargetService.*(..))") //중심적 관심사의 '전후'로 추가 처리 내용을 수행
+    @Around("execution(* com.example.demo.service.TargetService.*(..))") //중심적 관심사의 '전후'로 추가 처리 내용을 수행
     public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         Long startTIme = System.currentTimeMillis();
         System.out.println("-------【@Around : 전】-------");
