@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th ="http://www.thymeleaf.org"
+      th:replace="~{layout ::base(~{::title}, ~{::body})}">
 <head>
     <meta charset="UTF-8">
     <title>Thymeleaf Sample</title>
@@ -84,6 +85,29 @@
     </p>
     </div>
     <!-- 17: 유틸리티 객체(숫자,. 날짜 및 시간, 문자열) -->
-
+    <div th:with="x=1000000, y=123456.789">
+        정수 형식: <span th:text="${#numbers.formatInteger(x, 3, 'COMMA')}"></span><br/>
+        부동 소수점 형식: <span th:text="${#numbers.formatDecimal(y, 3, 'COMMA', 2,'POINT')}"></span>
+    </div>
+    <br/>
+    <div th:with="today=${#dates.createNow()}">
+        yyyy년: <span th:text="${#dates.format(today, 'yyyy,MM,dd')}"></span><br/>
+        yyyy년 mm월 dd일 형식: <span th:text="${#dates.format(today, 'yyyy년 MM월 dd일')}"></span><br/>
+        yyyy년: <span th:text="${#dates.year(today)}"></span><br/>
+        MM월: <span th:text="${#dates.month(today)}"></span><br>
+        dd일: <span th:text="${#dates.day(today)}"></span><br/>
+        요일: <span th:text="${#dates.dayOfWeek(today)}"></span>
+    </div>
+    <br/>
+    <div th:with="str1='abcdef'">
+        대문자 변환: <span th:text="${#strings.toUpperCase(str1)}"></span><br/>
+        빈 문자 판정: <span th:text="${#strings.isEmpty(str1)}"></span><br/>
+        길이: <span th:text="${#strings.length(str1)}"></span>
+    </div>
+    <hr>
+    <!-- 18: 프래그먼트 삽입 -->
+    <div id="one" th:insert="common :: header"></div>
+    <h1>위아래로 프래그먼트 삽입하기</h1>
+    <div id="two" th:replace="common :: footer"></div>
 </body>
 </html>
