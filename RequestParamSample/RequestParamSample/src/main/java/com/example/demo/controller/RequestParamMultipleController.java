@@ -26,7 +26,7 @@ public class RequestParamMultipleController {
 //                              @RequestParam String name,
 //                              @RequestParam Integer age,
 //                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam LocalDate birth) {
-//        // Model에 저장
+//        // Model 에 저장
 //        model.addAttribute("name", name);
 //        model.addAttribute("age", age);
 //        model.addAttribute("birth", birth);
