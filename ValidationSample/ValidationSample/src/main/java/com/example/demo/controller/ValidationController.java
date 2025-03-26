@@ -1,16 +1,29 @@
 package com.example.demo.controller;
 
 import com.example.demo.form.CalcForm;
+import com.example.demo.validator.CalcValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class ValidationController {
+    /** 주입 */
+    private final CalcValidator calcValidator;
+
+    /** 상관 항목 검사 등록 */
+    @InitBinder("calcForm")
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(calcValidator);
+    }
     /** '폼 연동 빈' 초기화 */
     @ModelAttribute
     public CalcForm setUpForm() {
