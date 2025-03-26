@@ -1,0 +1,30 @@
+package com.example.demo.controller;
+
+import com.example.demo.form.SampleForm;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.ui.Model;
+
+@Controller
+public class CheckController {
+    // 입력 화면 표시
+    @GetMapping()
+    public String showForm(SampleForm form) {
+        return "entry";
+    }
+
+    // 상관 항목 검사 실행
+    @PostMapping
+    public String check(@Validated SampleForm form,
+                        BindingResult bindingResult, Model model) {
+        // 유효성 검사 수행
+        if (bindingResult.hasErrors()) {
+            return "entry";
+        }
+        model.addAttribute("message", "입력에 문제가 없습니다.");
+        return "result";
+    }
+}
