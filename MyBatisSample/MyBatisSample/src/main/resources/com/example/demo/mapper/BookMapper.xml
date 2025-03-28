@@ -12,14 +12,36 @@
             <result property="name" column="publisher_name" />
         </association>
     </resultMap>
-    <!-- 【SELECT】 모든 책을 가져오기 위한 SQL을 정의 -->
-    <select id="getAllBooks" resultType="com.example.demo.entity.Book">
-        SElECT id, title, author FROM books ORDER BY id
+
+    <!-- 책과 리뷰의 일대다 관계 -->
+    <resultMap id="BookWithReviewsResult" type="com.example.demo.entity.Book">
+        <id property="id" column="id" />
+        <result property="title" column="title" />
+        <result property="author" column="author" />
+        <collection property="reviews" ofType="com.example.demo.entity.Review">
+            <id property="id" column="review_id" />
+            <result property="bookId" column="book_id" />
+            <result property="reviewText" column="review_text" />
+        </collection>
+    </resultMap>
+    <!-- 【SELECT】 모든 책(출판사)을 가져오기 위한 SQL 정의 -->
+    <select id="getAllBooks" resultMap="BookWithPublisherResult">
+        SELECT
+            b.id, b.title, b.author,
+            p.id as publisher_id, p.name as publisher_name
+        FROM books b
+        INNER JOIN publishers p ON b.publisher_id = p.id
+        ORDER BY b.id
     </select>
 
-    <!-- 【SELECT】 특정 ID를 가진 책을 가져오기 위한 SQL을 정의 -->
-    <select id="getBookById" resultType="com.example.demo.entity.Book">
-        SELECT id, title, author FROM books WHERE id = #{id}
+    <!-- 【SELECT】 특정 ID를 가진 책(리뷰)을 가져오기 위한 SQL을 정의 -->
+    <select id="getBookById" resultMap="BookWithReviewsResult">
+        SELECT
+            b.id, b.title, b.author, b.publisher_id,
+            r.id as review_id, r.book_id, r.review_text
+        FROM books b
+        INNER JOIN reviews r ON b.id = r.book_id
+        WHERE b.id = #{id}
     </select>
 
     <!-- 【INSERT】 새로운 책을 데이터베이스에 추가하는 SQL을 정의 -->

@@ -20,6 +20,7 @@
         <td th:text="${book.id}">ID</td>
         <td th:text="${book.title}">제목</td>
         <td th:text="${book.author}">저자</td>
+        <td th:text="${book.publisher.name}">출판사</td>
         </tr>
     </tbody>
     </table>
@@ -37,6 +38,16 @@
             <strong>저자: </strong>
             <span th:text="${book.author}">저자</span>
         </p>
+        <hr>
+        <!-- 리뷰 목록 -->
+        <div th:if="${book.reviews}">
+            <h3>리뷰 목록:</h3>
+            <ul>
+                <li th:each="review : ${book.reviews}">
+                    <span th:text="${review.reviewText}">리뷰 텍스트</span>
+                </li>
+            </ul>
+        </div>
     </div>
     <a th:href="@{/}">메뉴로 돌아가기</a>
 </body>
