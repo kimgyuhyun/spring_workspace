@@ -1,0 +1,52 @@
+package com.example.webapp;
+
+import com.example.webapp.entity.ToDo;
+import com.example.webapp.service.ToDoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@RequiredArgsConstructor
+public class WebappApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(WebappApplication.class, args)
+				.getBean(WebappApplication.class).exe();
+	}
+
+	/** DI */
+	private final ToDoService service;
+
+	public void exe() {
+		// * 전체 검색
+		System.out.println("=== 전체 검색 ===");
+		for (ToDo row : service.findAllToDo()) {
+			System.out.println(row);
+		}
+		// * 1건 검색
+		System.out.println("=== 1건 검색 ===");
+		System.out.println(service.findByIdToDo(1));
+		// * 등록
+		// 등록 데이터 생성
+		ToDo todo = new ToDo();
+		todo.setTodo("리포지터리 테스트");
+		todo.setDetail("ToDo 등록 서비스");
+		service.insertToDo(todo);
+		System.out.println("=== 등록 확인 ===");
+		System.out.println(service.findByIdToDo(4));
+		// * 업데이트
+		ToDo target = service.findByIdToDo(4);
+		target.setTodo("서비스 테스트: 업데이트");
+		target.setDetail("ToDO 업데이트 서비스");
+		service.updateToDo(target);
+		System.out.println("=== 업데이트 확인 ===");
+		System.out.println(service.findByIdToDo(4));
+		// * 삭제
+		service.deleteToDo(4);
+		System.out.println("=== 삭제 확인 ===");
+		for (ToDo row : service.findAllToDo()) {
+			System.out.println(row);
+		}
+	}
+}

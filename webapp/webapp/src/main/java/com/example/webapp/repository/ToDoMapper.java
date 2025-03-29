@@ -1,0 +1,39 @@
+package com.example.webapp.repository;
+
+
+import com.example.webapp.entity.ToDo;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * ToDo: 라포지터리
+ */
+@Mapper
+public interface ToDoMapper {
+    /**
+     *모든 '할일'을 가져옵니다.
+     */
+    List<ToDo> selectAll();
+
+    /**
+     *지정된 ID에 해당하는 '할일'을 가져옵니다.
+     */
+    ToDo selectById(@Param("id") Integer id);
+
+    /**
+     *'할일'을 등록합니다.
+     */
+    void insert(ToDo toDo);
+
+    /**
+     * '할일을 업데이트합니다.
+     */
+    void update(ToDo toDo);
+
+    /**
+     * 지정된 ID의 '할일'을 삭제합니다.
+     */
+    void delete(@Param("id") Integer id);
+}
