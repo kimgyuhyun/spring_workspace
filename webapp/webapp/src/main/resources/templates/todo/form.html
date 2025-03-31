@@ -17,6 +17,11 @@
                 <th>ToDo</th>
                 <td>
                     <input type="text" th:field="*{todo}">
+                    <!-- todo 용: 유효성 검사 오류 표시 -->
+                    <span th:if="${#fields.hasErrors('todo')}"
+                          th:errors="*{todo}" style="color: red;">
+                          오류가 있는 경우 표시
+                    </span>
                 </td>
             </tr>
                 <tr>
@@ -24,6 +29,10 @@
                     <td>
                     <textarea rows="5" cols="30" th:field="*{detail}">
                     </textarea>
+                    <!-- 상세 내용: 유효성 검사 오류 표시 -->
+                    <span th:if="${#fields.hasErrors('detail')}"
+                          th:errors="*{detail}" style="color: red;">
+                    </span>
                     </td>
                 </tr>
         </table>

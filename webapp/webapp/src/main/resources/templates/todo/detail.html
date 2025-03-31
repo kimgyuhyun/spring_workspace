@@ -33,7 +33,7 @@
             </td>
         </tr>
     </table>
-    <a th:href="@{todos/edit/{id}(id=${todo.id})}">편집</a>
+    <a th:href="@{/todos/edit/{id}(id=${todo.id})}">편집</a>
     <form th:action="@{/todos/delete/{id}(id=${todo.id})}" method="post">
         <input type="submit" value="삭제">
     </form>

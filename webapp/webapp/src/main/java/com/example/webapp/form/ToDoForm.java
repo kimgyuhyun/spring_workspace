@@ -1,6 +1,8 @@
 package com.example.webapp.form;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +17,10 @@ public class ToDoForm {
     /** 할일 ID */
     private Integer id;
     /** 할일 */
+    @NotBlank(message = "ToDo는 필수입니다.")
     private String todo;
     /** 할일 상세 내용 */
+    @Size(min = 1, max = 100, message = "상세 내용은 {min}~{max}자 이내로 입력하세요.")
     private String detail;
     /** 새 항목 여부 */
     private Boolean isNew;

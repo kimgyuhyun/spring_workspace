@@ -4,6 +4,8 @@ import com.example.webapp.form.ToDoForm;
 import com.example.webapp.helper.ToDoHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,8 +41,8 @@ public class ToDoController {
     public String detail(@PathVariable Integer id, Model model,
             RedirectAttributes attributes) {
         // 특정 ID에 해당하는 '할일' 정보를 획득
-        ToDo toDO = toDoService.findByIdToDo(id);
-        if (toDO != null) {
+        ToDo ToDo = toDoService.findByIdToDo(id);
+        if (ToDo != null) {
             // 대상 데이터가 있는 경우 모델에 저장
             model.addAttribute("todo", toDoService.findByIdToDo(id));
             return "todo/detail";
@@ -67,8 +69,16 @@ public class ToDoController {
      * 새 할일을 등록합니다.
      */
     @PostMapping("/save")
-    public String create(ToDoForm form,
+    public String create(@Validated ToDoForm form,
+                         BindingResult bindingResult,
                          RedirectAttributes attributes) {
+        // === 유효성 검사 ===
+        // 입력 체크 NG: 입력 화면 표시
+        if (bindingResult.hasErrors()) {
+            // 새 할일 등록 화면 설정
+            form.setIsNew(true);
+            return "todo/form";
+        }
         // 엔티티로 변환
         ToDo ToDo = ToDoHelper.convertToDo(form);
         // 등록 실행
@@ -105,8 +115,16 @@ public class ToDoController {
      * 할일을 업데이트합니다.
      */
     @PostMapping("/update")
-    public String update(ToDoForm form,
+    public String update(@Validated ToDoForm form,
+                         BindingResult bindingResult,
                          RedirectAttributes attributes) {
+        // === 유효성 검사 ===
+        // 입력 체크 NG: 입력 화면 표시
+        if (bindingResult.hasErrors()) {
+            // 업데이트 화면 설정
+            form.setIsNew(false);
+            return "todo/form";
+        }
         // 엔티티로 변환
         ToDo ToDo = ToDoHelper.convertToDo(form);
         // 할일 업데이트
