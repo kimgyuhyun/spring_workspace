@@ -1,5 +1,6 @@
 -- 테이블이 존재하면 삭제
 DROP TABLE IF EXISTS todos;
+DROP TABLE IF EXISTS authentications;
 
 -- 테이블 만들기
 CREATE TABLE todos (
@@ -13,4 +14,12 @@ CREATE TABLE todos (
     created_at timestamp without time zone,
     -- updated_at(업데이트 일자)
     updated_at timestamp without time zone
+);
+
+-- 인증 정보를 저장하는 테이블
+CREATE TABLE authentications (
+    -- 사용자명
+    username VARCHAR(50) PRIMARY kEY,
+    -- 비밀번호
+    password VARCHAR(255) NOT NULL
 );
