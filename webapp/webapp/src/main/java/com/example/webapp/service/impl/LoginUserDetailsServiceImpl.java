@@ -1,7 +1,10 @@
 package com.example.webapp.service.impl;
 
 
+import com.example.webapp.entity.Authentication;
 import com.example.webapp.entity.LoginUser;
+import com.example.webapp.repository.AuthenticationMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,19 +13,27 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 /**
- * UserDetailsService 구현 클래스
+ * 커스텀 인증 서비스
  */
 @Service
+@RequiredArgsConstructor
 public class LoginUserDetailsServiceImpl implements UserDetailsService {
+    /** DI */
+    private final AuthenticationMapper authenticationMapper;
     @Override
     public UserDetails loadUserByUsername(String username)
         throws UsernameNotFoundException {
-        // 사용자명으로 "minsoo"가 입력되면 UserDetails 구현 클래스를 반환
-        if (username.equals("minsoo")) {
+        // 인증 테이블에서 데이터를 가져옴
+        Authentication authentication = authenticationMapper.selectByUsername(username);
+
+        // 대상 데이터가 있으면 UserDetails의 구현 클래스를 반환
+        if (authentication != null) {
             // 대상 데이터가 존재
             // UserDetails의 구현 클래스를 반환
-            return new LoginUser("minsoo",
-                    "pass", Collections.emptyList());
+            return new LoginUser(authentication.getUsername(),
+                    authentication.getPassword(),
+                    Collections.emptyList()
+            );
         } else {
             // 대상 데이터가 존재하지 않음
             throw new UsernameNotFoundException(

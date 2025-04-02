@@ -85,7 +85,7 @@ public class ToDoController {
         toDoService.insertToDo(ToDo);
         // 플래시 메시지
         attributes.addFlashAttribute("message", "새 ToDo가 생성됐습니다.");
-        // RPG 패턴
+        // PRG 패턴
         return "redirect:/todos";
     }
 
