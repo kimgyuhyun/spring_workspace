@@ -13,8 +13,8 @@ VALUES
 
 -- 인증 테이블에 더미 데이터를 추가
 -- password: adminpass
-INSERT INTO authentications (username, password, authority) VALUES
-('admin', '$2a$10$MSm5rYNjEKF3iTKL3z.klufpmo5.FTFtD3rPgL79vXDTPfAAzDlhm', 'ADMIN');
+INSERT INTO authentications (username, password, authority, displayname) VALUES
+('admin', '$2a$10$MSm5rYNjEKF3iTKL3z.klufpmo5.FTFtD3rPgL79vXDTPfAAzDlhm', 'ADMIN', '관리자');
 -- password: userpass
-    INSERT INTO authentications (username, password, authority) VALUES
-    ('user', '$2a$10$eQTUaTY/5LBrp5FpSrnKLO9FgbKcJF1edLyZuLxPtn2ehx25C8gu2', 'USER');
+    INSERT INTO authentications (username, password, authority, displayname) VALUES
+    ('user', '$2a$10$eQTUaTY/5LBrp5FpSrnKLO9FgbKcJF1edLyZuLxPtn2ehx25C8gu2', 'USER', '일반 사용자');

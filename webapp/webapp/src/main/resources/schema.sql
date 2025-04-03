@@ -27,5 +27,7 @@ CREATE TABLE authentications (
     -- 비밀번호
     password VARCHAR(255) NOT NULL,
     -- 권한
-    authority role NOT NULL
+    authority role NOT NULL,
+    -- 표시명
+    displayname VARCHAR(50) NOT NULL
 );

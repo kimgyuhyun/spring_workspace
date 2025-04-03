@@ -10,11 +10,21 @@ import java.util.Collection;
  * 사용자의 인증 정보를 나타내는 UserDetails 구현 클래스
  */
 public class LoginUser extends User {
+
+    // 【추가 부분】 추가 필드
+    private  String displayname;
+
     /** 최소한의 정보만 담은 UserDetails 구현 클래스인
      * Useer 를 생성 */
     public LoginUser(String username,
                      String password,
-                     Collection<? extends GrantedAuthority> authorities) {
+                     Collection<? extends GrantedAuthority> authorities,
+                     String displayname) { //【추가 부분】 displayname 추가
         super(username, password, authorities);
+        this.displayname = displayname;
+    }
+    // 【추가 부분】 displayname의 게터
+    public String getDisplayname() {
+        return displayname;
     }
 }

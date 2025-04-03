@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 
 /**
@@ -37,7 +37,8 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService {
             // UserDetails 의 구현 클래스를 반환
             return new LoginUser(authentication.getUsername(),
                     authentication.getPassword(),
-                    getAuthorityList(authentication.getAuthority())
+                    getAuthorityList(authentication.getAuthority()),
+                    authentication.getDisplayname()
             );
         } else {
             // 대상 데이터가 존재하지 않음

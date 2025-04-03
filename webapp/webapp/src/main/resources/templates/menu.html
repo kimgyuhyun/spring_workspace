@@ -17,10 +17,13 @@
   <div sec:authentication="name">
       로그인 정보의 name 값으로 변경됨
   </div>
+  <div th:text="${#authentication.principal.displayname}">
+      새로 추가한  displayname 값으로 변경됨
+  </div>
   <div sec:authorize="isAuthenticated()">
       인증된 경우에만 표시
   </div>
-  </br>
+  <br>
   <!-- 로그아웃 -->
   <form th:action="@{/logout}" method="post">
       <input type="submit" value="로그아웃">

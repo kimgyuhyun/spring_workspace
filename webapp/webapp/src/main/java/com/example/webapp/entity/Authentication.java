@@ -15,4 +15,6 @@ public class Authentication {
     private String password;
     /** 권한 */
     private Role authority;
+    /** 표시명 */
+    private String displayname;
 }
