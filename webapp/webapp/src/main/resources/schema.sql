@@ -1,6 +1,7 @@
 -- 테이블이 존재하면 삭제
 DROP TABLE IF EXISTS todos;
 DROP TABLE IF EXISTS authentications;
+DROP TYPE IF EXISTS role;
 
 -- 테이블 만들기
 CREATE TABLE todos (
@@ -16,10 +17,15 @@ CREATE TABLE todos (
     updated_at timestamp without time zone
 );
 
+-- 권한용 ENUM 타입
+CREATE TYPE role AS ENUM ('ADMIN', 'USER');
+
 -- 인증 정보를 저장하는 테이블
 CREATE TABLE authentications (
-    -- 사용자명
+    -- 사용자명: 기본키
     username VARCHAR(50) PRIMARY kEY,
     -- 비밀번호
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    -- 권한
+    authority role NOT NULL
 );

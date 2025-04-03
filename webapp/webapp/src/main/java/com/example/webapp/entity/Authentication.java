@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class Authentication {
     /** 사용자명 */
     private String username;
-    /* 비밀번호 */
+    /** 비밀번호 */
     private String password;
+    /** 권한 */
+    private Role authority;
 }

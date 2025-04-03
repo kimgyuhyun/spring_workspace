@@ -12,5 +12,9 @@ VALUES
 ('헬스장 가기', '운동하기', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- 인증 테이블에 더미 데이터를 추가
-INSERT INTO authentications (username, password) VALUES
-('admin', '$2a$10$MSm5rYNjEKF3iTKL3z.klufpmo5.FTFtD3rPgL79vXDTPfAAzDlhm');
+-- password: adminpass
+INSERT INTO authentications (username, password, authority) VALUES
+('admin', '$2a$10$MSm5rYNjEKF3iTKL3z.klufpmo5.FTFtD3rPgL79vXDTPfAAzDlhm', 'ADMIN');
+-- password: userpass
+    INSERT INTO authentications (username, password, authority) VALUES
+    ('user', '$2a$10$eQTUaTY/5LBrp5FpSrnKLO9FgbKcJF1edLyZuLxPtn2ehx25C8gu2', 'USER');

@@ -11,7 +11,7 @@ public class PasswordGenerator {
         // BCrypt 인스턴스화
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         // 입력값
-        String rawPassword = "adminpass";
+        String rawPassword = "userpass";
         // 비밀번호 해시화
         String encodePassword = encoder.encode(rawPassword);
         // 출력

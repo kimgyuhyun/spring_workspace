@@ -26,6 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // /login은 인증이 필요하지 않음
                         .requestMatchers("/login").permitAll()
+                        // 【관리자 권한 설정】 /todos/**에는 관리자만 접근 가능
+                        .requestMatchers("/todos/**").hasAnyAuthority("ADMIN")
                         // 그 밖의 요청은 인증이 필요
                         .anyRequest().authenticated())
                 // ★ 폼 기반 로그인 설정
